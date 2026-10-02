@@ -19,7 +19,11 @@ export function createButton({ text, onClick, icon, ariaLabel, primary = false }
   const children = [text];
   if (icon) {
     children.unshift(
-      el('span', { className: 'btn__icon', text: icon, attrs: { 'aria-hidden': 'true' } }),
+      el('span', {
+        className: 'btn__icon',
+        text: icon,
+        attrs: { 'aria-hidden': 'true' },
+      }),
     );
   }
 

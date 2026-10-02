@@ -25,7 +25,9 @@ export function createStats() {
       el('span', { text: 'convergence' }),
       barValue,
     ]),
-    el('div', { className: 'progress__track', attrs: { 'aria-hidden': 'true' } }, [barFill]),
+    el('div', { className: 'progress__track', attrs: { 'aria-hidden': 'true' } }, [
+      barFill,
+    ]),
   ]);
 
   const element = el(

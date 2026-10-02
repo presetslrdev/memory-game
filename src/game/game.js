@@ -13,7 +13,12 @@ export const MISMATCH_DELAY = 1000;
  * @param {(event: MoveEvent) => void} [config.onMove] - a move (two cards) was made
  * @param {(result: {moves: number}) => void} [config.onWin] - all pairs found
  */
-export function createGame({ cards, onChange = () => {}, onMove = () => {}, onWin = () => {} }) {
+export function createGame({
+  cards,
+  onChange = () => {},
+  onMove = () => {},
+  onWin = () => {},
+}) {
   const totalPairs = cards.length;
 
   let deck = [];

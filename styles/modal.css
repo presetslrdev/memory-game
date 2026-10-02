@@ -145,3 +145,22 @@ body.is-modal-open {
   border: 1px dashed var(--line-strong);
   border-radius: 8px;
 }
+
+@media (max-width: 560px) {
+  .modal__content {
+    padding: 20px;
+  }
+
+  .modal__title {
+    font-size: 20px;
+  }
+
+  .win__moves {
+    font-size: 56px;
+  }
+
+  .modal__actions .btn {
+    flex: 1;
+    justify-content: center;
+  }
+}

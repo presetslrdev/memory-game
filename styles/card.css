@@ -189,3 +189,21 @@
     animation: none;
   }
 }
+
+@media (max-width: 560px) {
+  .card,
+  .card__back,
+  .card__face {
+    border-radius: 8px;
+  }
+
+  .card__hex {
+    display: none;
+  }
+
+  .card__tag {
+    top: 4px;
+    right: 4px;
+    padding: 0 4px;
+  }
+}

@@ -1,16 +1,17 @@
 import { el } from './utils/create-element.js';
 import { CARDS } from './data/cards.js';
 import { createGame } from './game/game.js';
-import { addResult } from './storage/leaderboard.js';
+import { addResult, getResults } from './storage/leaderboard.js';
 import { createHeader } from './components/header.js';
 import { createStats } from './components/stats.js';
 import { createBoard } from './components/board.js';
 import { createModal } from './components/modal.js';
 import { createWinContent } from './components/win-content.js';
+import { createLeaderboardContent } from './components/leaderboard-content.js';
 
 const header = createHeader({
   onNewGame: startNewGame,
-  onLeaderboard: () => {},
+  onLeaderboard: showLeaderboard,
 });
 const stats = createStats();
 const board = createBoard({ onFlip: (index) => game.flip(index) });
@@ -42,6 +43,15 @@ function showWin({ moves }) {
     onClose: modal.close,
   });
   modal.open(content, 'Game won');
+}
+
+function showLeaderboard() {
+  // only shows the window: the game and its mismatch timer keep going
+  const content = createLeaderboardContent({
+    results: getResults(),
+    onClose: modal.close,
+  });
+  modal.open(content, 'Leaderboard');
 }
 
 const app = el('div', { className: 'app' }, [

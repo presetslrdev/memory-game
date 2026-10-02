@@ -38,10 +38,11 @@ export function createHeader({ onNewGame, onLeaderboard }) {
 
   const element = el('header', { className: 'header' }, [brand, actions]);
 
-  /** Shows a new random run number, e.g. "run #0427". */
+  /** Shows a new random run number, e.g. "run #0427", and returns it. */
   function nextRun() {
     const id = String(Math.floor(Math.random() * 10000)).padStart(4, '0');
     runId.textContent = `run #${id}`;
+    return runId.textContent;
   }
 
   return { element, nextRun };

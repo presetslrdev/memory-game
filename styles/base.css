@@ -1,7 +1,28 @@
+:root {
+  --bg: #0b0d0e;
+  --bg-raised: #121517;
+  --bg-sunken: #08090a;
+  --line: #262c2f;
+  --line-strong: #3a4246;
+  --text: #e6e8e3;
+  --muted: #7f8781;
+  --accent: #c6ff3d;
+  --accent-soft: rgba(198, 255, 61, 0.12);
+  --accent-ink: #0b0d0e;
+  --danger: #ff4d6d;
+  --danger-soft: rgba(255, 77, 109, 0.14);
+  --radius: 10px;
+  --font: 'JetBrains Mono', ui-monospace, 'Cascadia Code', Consolas, monospace;
+}
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+html {
+  scrollbar-gutter: stable;
 }
 
 html,
@@ -12,9 +33,18 @@ body {
 
 body {
   min-height: 100vh;
-  font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
-  background-color: #0b0d0e;
-  color: #e6e8e3;
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 12% -10%, rgba(198, 255, 61, 0.09), transparent 40%),
+    radial-gradient(rgba(198, 255, 61, 0.07) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    22px 22px;
+  background-attachment: fixed;
 }
 
 button {
@@ -26,4 +56,14 @@ button {
 img {
   display: block;
   max-width: 100%;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+::selection {
+  color: var(--accent-ink);
+  background: var(--accent);
 }

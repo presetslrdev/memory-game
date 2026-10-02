@@ -27,10 +27,13 @@ export function createModal() {
     }
   });
 
-  // 'close' fires for every way of closing, including Escape
+  // 'close' fires for every way of closing, including Escape.
+  // It is async, so check that the window was not opened again meanwhile.
   dialog.addEventListener('close', () => {
-    document.body.classList.remove('is-modal-open');
-    content.replaceChildren();
+    if (!dialog.open) {
+      document.body.classList.remove('is-modal-open');
+      content.replaceChildren();
+    }
   });
 
   document.body.append(dialog);

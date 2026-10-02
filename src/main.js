@@ -1,9 +1,12 @@
 import { el } from './utils/create-element.js';
 import { CARDS } from './data/cards.js';
 import { createGame } from './game/game.js';
+import { addResult } from './storage/leaderboard.js';
 import { createHeader } from './components/header.js';
 import { createStats } from './components/stats.js';
 import { createBoard } from './components/board.js';
+import { createModal } from './components/modal.js';
+import { createWinContent } from './components/win-content.js';
 
 const header = createHeader({
   onNewGame: startNewGame,
@@ -11,6 +14,7 @@ const header = createHeader({
 });
 const stats = createStats();
 const board = createBoard({ onFlip: (index) => game.flip(index) });
+const modal = createModal();
 
 const game = createGame({
   cards: CARDS,
@@ -18,11 +22,26 @@ const game = createGame({
     stats.update(state);
     board.render(state);
   },
+  onWin: showWin,
 });
 
 function startNewGame() {
+  modal.close();
   header.nextRun();
   game.newGame();
+}
+
+function showWin({ moves }) {
+  // the game calls onWin only once per game, so the result is saved once
+  const { rank } = addResult(moves);
+
+  const content = createWinContent({
+    moves,
+    rank,
+    onNewGame: startNewGame,
+    onClose: modal.close,
+  });
+  modal.open(content, 'Game won');
 }
 
 const app = el('div', { className: 'app' }, [

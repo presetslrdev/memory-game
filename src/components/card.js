@@ -1,4 +1,5 @@
 import { el } from '../utils/create-element.js';
+import { scrambleText } from '../utils/scramble.js';
 
 const TAGS = {
   matched: 'learned ✓',
@@ -39,6 +40,7 @@ export function createCard(card, index) {
   );
 
   let currentStatus = '';
+  let stopScramble = () => {};
 
   /**
    * @param {'hidden' | 'open' | 'matched' | 'mismatch'} status
@@ -47,9 +49,17 @@ export function createCard(card, index) {
     if (status === currentStatus) {
       return;
     }
+    const wasHidden = currentStatus === 'hidden';
     currentStatus = status;
 
     const isVisible = status !== 'hidden';
+
+    // run the "decoding" only at the moment the card is opened
+    stopScramble();
+    if (isVisible && wasHidden) {
+      stopScramble = scrambleText(label, card.label);
+    }
+
     element.classList.toggle('is-open', isVisible);
     element.classList.toggle('is-matched', status === 'matched');
     element.classList.toggle('is-mismatch', status === 'mismatch');

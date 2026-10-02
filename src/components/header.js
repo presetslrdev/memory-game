@@ -1,17 +1,5 @@
 import { el } from '../utils/create-element.js';
-
-/** Button with a decorative icon and a text. */
-function createButton({ icon, text, ariaLabel, className = 'btn', onClick }) {
-  return el(
-    'button',
-    {
-      className,
-      attrs: { type: 'button', 'aria-label': ariaLabel },
-      on: { click: onClick },
-    },
-    [el('span', { className: 'btn__icon', text: icon, attrs: { 'aria-hidden': 'true' } }), text],
-  );
-}
+import { createButton } from './button.js';
 
 /**
  * Top bar: brand, current run id and two main buttons.
@@ -37,7 +25,7 @@ export function createHeader({ onNewGame, onLeaderboard }) {
       icon: '▶',
       text: 'new run',
       ariaLabel: 'New game',
-      className: 'btn btn--primary',
+      primary: true,
       onClick: onNewGame,
     }),
     createButton({
